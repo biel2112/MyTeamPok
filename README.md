@@ -4,7 +4,7 @@
 <br>
 Na tela inicial, se a lista não estiver vazia, será mostrada uma lista de até 6 pokemons.
 
-![TelaInicial](/assets/Captura de Tela 2025-03-06 às 00.37.51.png)
+![TelaInicialVazia](/assets/Captura%20de%20Tela%202025-03-06%20às%2000.37.51.png)
 
 (Por questões de direitos autorais, achei melhor não colocar imagens dos pokemons nem colocar os nomes no vídeo)
 
