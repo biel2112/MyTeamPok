@@ -4,9 +4,7 @@ import com.pokemon.angular_pokemon.dto.AtualizarPokemonDto;
 import com.pokemon.angular_pokemon.dto.PokemonDto;
 import com.pokemon.angular_pokemon.model.Pokemon;
 import com.pokemon.angular_pokemon.repository.PokemonRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 // Essa classe contém toda a lógica de negócio do sistema.
