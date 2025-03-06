@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// Classe responsável por representar um Pokemon no Banco de Dados
+
 @Entity
 @Table(name = "pokemons")
 @Getter
