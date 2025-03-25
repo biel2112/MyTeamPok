@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
-import { PokemonFormComponent } from './components/pokemon-form/pokemon-form.component';
-import { PokemonEditComponent } from './components/pokemon-edit/pokemon-edit.component';
+import { PokemonListComponent } from './components/pokemons/pokemon-list/pokemon-list.component';
+import { PokemonFormComponent } from './components/pokemons/pokemon-form/pokemon-form.component';
+import { PokemonEditComponent } from './components/pokemons/pokemon-edit/pokemon-edit.component';
 
 const routes: Routes = [
   {

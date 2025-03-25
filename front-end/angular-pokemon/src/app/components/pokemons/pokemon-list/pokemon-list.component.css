@@ -83,7 +83,12 @@ p{
 .imagem-pokemon{
   width: 200px;
   height: 150px;
+  border: 5px solid transparent;
+  background: conic-gradient(red 0deg 180deg, white 180deg 360deg);
+  padding: 5px;
 }
+
+
 
 .imagem-pokemon:hover{
   animation: girar 3s infinite;

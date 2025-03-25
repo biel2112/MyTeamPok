@@ -3,19 +3,22 @@ package com.pokemon.angular_pokemon.service;
 import com.pokemon.angular_pokemon.dto.AtualizarPokemonDto;
 import com.pokemon.angular_pokemon.dto.PokemonDto;
 import com.pokemon.angular_pokemon.model.Pokemon;
+import com.pokemon.angular_pokemon.model.Treinador;
 import com.pokemon.angular_pokemon.repository.PokemonRepository;
+import com.pokemon.angular_pokemon.repository.TreinadorRepository;
+
+import lombok.AllArgsConstructor;
+
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 // Essa classe contém toda a lógica de negócio do sistema.
 @Service
+@AllArgsConstructor
 public class PokemonService {
 
     private final PokemonRepository pokemonRepository;
-
-    public PokemonService(PokemonRepository repository){
-        this.pokemonRepository = repository;
-    }
+    private final TreinadorRepository treinadorRepository;
 
     // Retorna Pokémons paginados.
     public Page<Pokemon> listarPokemons(int pagina, int numeroElementos){
@@ -25,7 +28,12 @@ public class PokemonService {
 
     // Cria um novo Pokémon.
     public Pokemon salvarPokemon(PokemonDto dto) {
-        Pokemon pokemon = new Pokemon(null,dto.nome(), dto.tipo(), dto.nivel(), dto.imagemUrl());
+        Treinador treinador = null;
+        if (dto.treinadorId() != null) {
+            treinador = treinadorRepository.findById(dto.treinadorId())
+                    .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
+        }
+        Pokemon pokemon = new Pokemon(null,dto.nome(), dto.tipo(), dto.nivel(), dto.imagemUrl(), treinador);
         return pokemonRepository.save(pokemon);
     }
 

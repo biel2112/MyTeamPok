@@ -1,0 +1,26 @@
+<!-- Tela de formulário de edição de  informações do Pokemon -->
+
+<div class="container mt-4">
+  <h2 class="text-center">Editar Pokémon</h2>
+  <form #pokemonFormEdicao="ngForm" (ngSubmit)="salvarEdicao()" novalidate>
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+      <input type="text" class="form-control" [(ngModel)]="pokemon.nome" name="nome" required #nome="ngModel">
+      <div *ngIf="nome.invalid && nome.touched" class="text-danger">Nome é obrigatório</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Tipo</label>
+      <input type="text" class="form-control" [(ngModel)]="pokemon.tipo" name="tipo" required #tipo="ngModel">
+      <div *ngIf="tipo.invalid && tipo.touched" class="text-danger">Tipo é obrigatório</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Imagem (URL)</label>
+      <input type="text" class="form-control" [(ngModel)]="pokemon.imagemUrl" name="imagemUrl" required #imagemUrl="ngModel">
+      <div *ngIf="imagemUrl.invalid && imagemUrl.touched" class="text-danger">Imagem é obrigatória</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="pokemonFormEdicao.invalid">Salvar</button>
+  </form>
+</div>

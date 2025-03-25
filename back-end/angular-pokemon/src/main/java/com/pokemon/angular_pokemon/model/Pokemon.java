@@ -32,4 +32,7 @@ public class Pokemon {
     @Column(nullable = false)
     private String imagemUrl;
 
+    @ManyToOne
+    private Treinador treinador;
+
 }
