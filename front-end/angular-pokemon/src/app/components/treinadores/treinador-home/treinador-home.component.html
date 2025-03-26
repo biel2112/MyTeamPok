@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let pokemon of pokemons">
+      <div
+        class="card border border-3 border-black"
+        [ngClass]="coresCards(pokemon.tipo)"
+      >
+        <div class="row g-0">
+          <div class="col-4">
+            <img
+              [src]="pokemon.imagemUrl"
+              class="imagem-pokemon img-fluid rounded-circle border border-black m-1"
+              alt="{{ pokemon.nome }}"
+            />
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h1 class="card-title">{{ pokemon.nome }}</h1>
+              <h5 class="card-text">Tipo: {{ pokemon.tipo }}</h5>
+              <p class="card-text">Nível: {{ pokemon.nivel }}</p>
+
+              <div class="d-flex flex-wrap justify-content-center">
+                <button
+                  class="botao-quadrado btn btn-success btn-sm m-1"
+                  (click)="aumentarNivel(pokemon.id!)"
+                  [disabled]="pokemon.nivel >= 100"
+                >
+                  <i class="bi bi-arrow-up"></i>
+                </button>
+
+                <button
+                  class="botao-quadrado btn btn-warning btn-sm m-1"
+                  (click)="diminuirNivel(pokemon.id!)"
+                  [disabled]="pokemon.nivel == 1"
+                >
+                  <i class="bi bi-arrow-down"></i>
+                </button>
+                <button
+                  class="botao-quadrado btn btn-primary btn-sm m-1"
+                  [routerLink]="['/pokemons/edit', pokemon.id]"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button
+                  class="botao-quadrado btn btn-danger btn-sm m-1"
+                  (click)="excluirPokemon(pokemon.id!)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="btn btn-primary w-25 mt-3 mb-4"
+    [routerLink]="['/pokemons/new']"
+  >
+    Cadastrar Novo Pokémon
+  </button>
+</div>

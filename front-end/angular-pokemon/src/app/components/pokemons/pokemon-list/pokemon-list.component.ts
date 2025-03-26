@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faArrowDown, faArrowUp, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
+import { Pokemon, PokemonService } from 'src/app/services/pokemon/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',

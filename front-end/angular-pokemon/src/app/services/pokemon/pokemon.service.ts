@@ -10,6 +10,7 @@ export interface Pokemon{
   imagemUrl: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })

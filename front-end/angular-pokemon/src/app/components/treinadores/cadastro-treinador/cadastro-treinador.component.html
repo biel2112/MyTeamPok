@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2 class="text-center">Criar Conta</h2>
+  <form #cadastroForm="ngForm" (ngSubmit)="cadastrarTreinador()" novalidate>
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+      <input type="text" class="form-control" [(ngModel)]="nome" name="nome" required #nomeField="ngModel">
+      <div *ngIf="nomeField.invalid && nomeField.touched" class="text-danger">Nome é obrigatório</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input type="password" class="form-control" [(ngModel)]="senha" name="senha" required #senhaField="ngModel">
+      <div *ngIf="senhaField.invalid && senhaField.touched" class="text-danger">Senha é obrigatória</div>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100" [disabled]="cadastroForm.invalid">Cadastrar</button>
+  </form>
+</div>

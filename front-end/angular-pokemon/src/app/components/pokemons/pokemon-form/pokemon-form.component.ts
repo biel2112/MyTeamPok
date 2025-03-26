@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
+import { Pokemon, PokemonService } from 'src/app/services/pokemon/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-form',

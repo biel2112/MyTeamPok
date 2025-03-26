@@ -11,29 +11,21 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeRequests(auth -> auth
-                .requestMatchers("/treinadores/cadastro","/treinadores/login").permitAll()
-                .anyRequest().authenticated()
-                )
-                .formLogin(login -> login
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/home", true)
-                    .permitAll()
-                )
-                .logout(logout -> logout
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login")
-                    .permitAll()
-                );
-                return http.build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .requestMatchers("/treinadores/login").permitAll()  // Altere antMatchers para requestMatchers
+            .requestMatchers("/treinadores/**").authenticated() // E aqui também
+            .and()
+            .formLogin()
+            .loginPage("/login")  // URL da página de login
+            .permitAll();
+        return http.build();
     }
 
     @Bean
-    public PasswordEncoder encoder(){
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
+

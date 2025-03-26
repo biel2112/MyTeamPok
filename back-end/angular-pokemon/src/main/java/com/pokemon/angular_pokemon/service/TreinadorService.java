@@ -2,6 +2,8 @@ package com.pokemon.angular_pokemon.service;
 import com.pokemon.angular_pokemon.dto.TreinadorDto;
 import com.pokemon.angular_pokemon.model.Treinador;
 import com.pokemon.angular_pokemon.repository.TreinadorRepository;
+
+import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,11 @@ public class TreinadorService {
 
     public String codificarSenha(String senha){
         return passwordEncoder.encode(senha);
+    }
+
+    public Page<Treinador> listarTreinadores(int pagina, int numeroElementos){
+        PageRequest pageRequest = PageRequest.of(pagina, numeroElementos, Sort.by("id").ascending());
+        return treinadorRepository.findAll(pageRequest);
     }
 
     public Treinador cadastrarTreinador(TreinadorDto dto) {

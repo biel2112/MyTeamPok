@@ -9,6 +9,9 @@ import { PokemonListComponent } from './components/pokemons/pokemon-list/pokemon
 import { PokemonFormComponent } from './components/pokemons/pokemon-form/pokemon-form.component';
 import { PokemonEditComponent } from './components/pokemons/pokemon-edit/pokemon-edit.component';
 import { FormsModule } from '@angular/forms';
+import { CadastroTreinadorComponent } from './components/treinadores/cadastro-treinador/cadastro-treinador.component';
+import { LoginTreinadorComponent } from './components/treinadores/login-treinador/login-treinador.component';
+import { TreinadorHomeComponent } from './components/treinadores/treinador-home/treinador-home.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     PokemonListComponent,
     PokemonFormComponent,
-    PokemonEditComponent
+    PokemonEditComponent,
+    CadastroTreinadorComponent,
+    LoginTreinadorComponent,
+    TreinadorHomeComponent
   ],
   imports: [
     BrowserModule,

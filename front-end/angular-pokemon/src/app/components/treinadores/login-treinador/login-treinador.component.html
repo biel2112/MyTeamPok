@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2 class="text-center">Login</h2>
+  <form #loginForm="ngForm" (ngSubmit)="fazerLogin(loginForm)" novalidate>
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="nome"
+        name="nome"
+        required
+        #nomeField="ngModel">
+      <div *ngIf="nomeField.invalid && nomeField.touched" class="text-danger">
+        Nome é obrigatório
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input
+        type="password"
+        class="form-control"
+        [(ngModel)]="senha"
+        name="senha"
+        required
+        #senhaField="ngModel">
+      <div *ngIf="senhaField.invalid && senhaField.touched" class="text-danger">
+        Senha é obrigatória
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-100"
+      [disabled]="loginForm.invalid">
+      Entrar
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary w-100 mt-2"
+      (click)="irParaCadastro()">
+      Criar conta
+    </button>
+  </form>
+</div>
