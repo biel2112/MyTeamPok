@@ -33,7 +33,7 @@ public class Treinador {
     private String nome;
 
     @OneToMany(mappedBy = "treinadores", cascade = CascadeType.ALL, fetch = FetchType.LAZY)    
-    private List<Pokemon> pokemons = new ArrayList<Pokemon>();
+    private List<Pokemon> pokemons;
 
     public void adicionarPokemon(Pokemon pokemon){
         if(pokemons.size() < 6){

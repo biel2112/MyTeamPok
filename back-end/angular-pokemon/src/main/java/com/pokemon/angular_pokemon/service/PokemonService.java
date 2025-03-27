@@ -17,6 +17,14 @@ public class PokemonService {
         this.pokemonRepository = repository;
     }
 
+    public Pokemon buscarPorId(Long id){
+        return pokemonRepository.findById(id).orElseThrow(() -> new RuntimeException("Pokemon não encontrado!")) ;
+    }
+
+    // Exclui um Pokemon pelo ID
+    public void deletarPokemon(Long id){
+        pokemonRepository.deleteById(id);
+    }
 
     // Aumenta o nível do Pokemon
     public Pokemon subirNivel(Long id) {
