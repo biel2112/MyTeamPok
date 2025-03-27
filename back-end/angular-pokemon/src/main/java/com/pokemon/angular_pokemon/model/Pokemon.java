@@ -10,8 +10,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "pokemons")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pokemon {
@@ -20,7 +19,7 @@ public class Pokemon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nome;
 
     @Column(nullable = false)
@@ -31,5 +30,9 @@ public class Pokemon {
 
     @Column(nullable = false)
     private String imagemUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "treinador_id", nullable = true)
+    private Treinador treinador;
 
 }
