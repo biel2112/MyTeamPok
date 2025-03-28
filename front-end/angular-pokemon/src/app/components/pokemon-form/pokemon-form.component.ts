@@ -18,9 +18,9 @@ export class PokemonFormComponent {
 
   constructor(private pokemonService: PokemonService, private router: Router){}
 
-  cadastrarPokemon(): void{
-    this.pokemonService.cadastrarPokemon(this.pokemon).subscribe(() => {
-      this.router.navigate(['/']);
-    })
-  }
+  // cadastrarPokemon(): void{
+  //   this.pokemonService.cadastrarPokemon(this.pokemon).subscribe(() => {
+  //     this.router.navigate(['/']);
+  //   })
+  // }
 }

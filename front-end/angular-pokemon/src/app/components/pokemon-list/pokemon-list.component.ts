@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faArrowDown, faArrowUp, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
 
@@ -7,56 +8,39 @@ import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
-export class PokemonListComponent implements OnInit{
+export class PokemonListComponent implements OnInit {
 
   pokemons: Pokemon[] = [];
+  treinadorId: number | null = null;;
+  nomeTreinador: string | null = null;;
 
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
   faEdit = faEdit;
   faTrash = faTrash;
 
-  constructor(private pokemonService: PokemonService){}
+  constructor(private pokemonService: PokemonService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.pokemonService.listarPokemons().subscribe(
-      (pokemons) => {
-        this.pokemons = pokemons;
-      },
-      (error) => {
-        console.error('Erro ao carregar os Pokémons:', error);
-      }
-    );
+    // Pegando os parâmetros da URL
+    this.treinadorId = Number(this.route.snapshot.paramMap.get('treinadorId'));
+    this.nomeTreinador = this.route.snapshot.paramMap.get('nomeTreinador') || '';
+
+    // Buscando os Pokémons do treinador
+    this.pokemonService.listarPokemons(this.treinadorId, this.nomeTreinador)
+      .subscribe((data: Pokemon[]) => {
+        this.pokemons = data;
+      });
   }
 
-  carregarPokemon(): void{
-    this.pokemonService.listarPokemons().subscribe((data) => {
+  // Esse método pode ser utilizado se você precisar recarregar a lista de pokémons
+  carregarPokemon(): void {
+    this.pokemonService.listarPokemons(this.treinadorId!, this.nomeTreinador!).subscribe((data: Pokemon[]) => {
       this.pokemons = data;
-    })
+    });
   }
 
-  excluirPokemon(id: number): void{
-    this.pokemonService.deletarPokemon(id).subscribe(() => {
-      this.carregarPokemon();
-    })
-  }
-
-  aumentarNivel(id: number): void{
-    this.pokemonService.subirNivel(id).subscribe(() => {
-      this.carregarPokemon();
-    })
-  }
-
-  diminuirNivel(id: number): void{
-    this.pokemonService.diminuirNivel(id).subscribe(() => {
-      this.carregarPokemon();
-    })
-  }
-
-  atualizarPokemon(id: number): void{
-    console.log("Atualizando Pokemon")
-  }
-
+  // Adicionando método para obter a classe de cores dos cards baseado no tipo de Pokémon
   coresCards(tipo: string): string {
     const cores: { [key: string]: string } = {
       Fogo: 'bg-fogo text-white',

@@ -15,42 +15,15 @@ export interface Pokemon{
 })
 export class PokemonService {
 
-  private apiUrl = 'http://localhost:8080/pokemons';
 
-
+  private apiUrl = 'http://localhost:8080/treinadores';
 
   constructor(private http: HttpClient) { }
 
-  listarPokemons(): Observable<Pokemon[]> {
-    return this.http.get<any>(this.apiUrl).pipe(
-      map(response => response.content) // Pegando apenas a lista dentro de "content"
-    );
+  listarPokemons(treinadorId: number, nomeTreinador: string): Observable<any[]> {
+    const url = `${this.apiUrl}/${treinadorId}/${nomeTreinador}/pokemons`;
+    return this.http.get<any[]>(url);
   }
-
-  buscarPorId(id: number): Observable<Pokemon>{
-    return this.http.get<Pokemon>(`${this.apiUrl}/${id}`);
-  }
-
-  cadastrarPokemon(pokemon: Pokemon): Observable<Pokemon>{
-    return this.http.post<Pokemon>(this.apiUrl, pokemon);
-  }
-
-  atualizarPokemon(id: number, pokemon: Partial<Pokemon>): Observable<Pokemon>{
-    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}`, pokemon);
-  }
-
-  deletarPokemon(id: number): Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  subirNivel(id: number): Observable<Pokemon> {
-    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}/subir-nivel`, {});
-  }
-
-  diminuirNivel(id: number): Observable<Pokemon> {
-    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}/diminuir-nivel`, {});
-  }
-
 
 }
 
