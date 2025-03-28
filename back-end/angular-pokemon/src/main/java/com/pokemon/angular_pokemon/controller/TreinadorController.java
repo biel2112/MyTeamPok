@@ -66,7 +66,7 @@ public class TreinadorController {
     }
 
     // Remover um Pokémon do treinador
-    @DeleteMapping("/{treinadorId}/{nomeTreinador}/pokemons/{pokemonId}")
+    @DeleteMapping("/{treinadorId}/{nomeTreinador}/pokemons/delete/{pokemonId}")
     public ResponseEntity<Treinador> removerPokemon(
             @PathVariable Long treinadorId, 
             @PathVariable String nomeTreinador, 
