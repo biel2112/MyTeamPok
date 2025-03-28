@@ -14,7 +14,7 @@ const routes: Routes = [
     component: PokemonListComponent
   },
   {
-    path: 'treinadores/:treinadorId/:nomeTreinador//pokemons/new',
+    path: 'treinadores/:treinadorId/:nomeTreinador/pokemons/new',
     component: PokemonFormComponent,
   },
   // {
