@@ -82,8 +82,9 @@ p{
 
 .imagem-pokemon{
   margin: 10px;
-  width: 200px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
+  background: linear-gradient(to bottom, red 50%, white 50%);
 }
 
 .imagem-pokemon:hover{
