@@ -32,8 +32,8 @@ public class Treinador {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "treinadores", cascade = CascadeType.ALL, fetch = FetchType.LAZY)    
-    private List<Pokemon> pokemons;
+    @OneToMany(mappedBy = "treinador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)    
+    private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 
     public void adicionarPokemon(Pokemon pokemon){
         if(pokemons.size() < 6){

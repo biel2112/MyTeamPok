@@ -1,48 +1,100 @@
 package com.pokemon.angular_pokemon.service;
 
-import com.pokemon.angular_pokemon.dto.AtualizarPokemonDto;
-import com.pokemon.angular_pokemon.dto.PokemonDto;
 import com.pokemon.angular_pokemon.model.Pokemon;
+import com.pokemon.angular_pokemon.model.Treinador;
 import com.pokemon.angular_pokemon.repository.PokemonRepository;
-import org.springframework.data.domain.*;
+import com.pokemon.angular_pokemon.repository.TreinadorRepository;
+
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Essa classe contém toda a lógica de negócio do sistema.
 @Service
+@RequiredArgsConstructor
 public class PokemonService {
 
+    @Autowired
     private final PokemonRepository pokemonRepository;
 
-    public PokemonService(PokemonRepository repository){
-        this.pokemonRepository = repository;
+    @Autowired
+    private TreinadorRepository treinadorRepository;
+
+    // Aumenta o nível do Pokémon, validando o treinador
+public Pokemon subirNivel(Long idTreinador, String nomeTreinador, Long idPokemon) {
+    Treinador treinador = treinadorRepository.findById(idTreinador)
+            .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
+
+    if (!treinador.getNome().equals(nomeTreinador)) {
+        throw new RuntimeException("Nome do treinador não corresponde ao ID");
     }
 
-    public Pokemon buscarPorId(Long id){
-        return pokemonRepository.findById(id).orElseThrow(() -> new RuntimeException("Pokemon não encontrado!")) ;
+    Pokemon pokemon = pokemonRepository.findById(idPokemon)
+            .orElseThrow(() -> new RuntimeException("Pokémon não encontrado"));
+
+    if (!pokemon.getTreinador().getId().equals(idTreinador)) {
+        throw new RuntimeException("Este Pokémon não pertence ao treinador informado");
     }
 
-    // Exclui um Pokemon pelo ID
-    public void deletarPokemon(Long id){
-        pokemonRepository.deleteById(id);
+    pokemon.setNivel(pokemon.getNivel() + 1);
+    return pokemonRepository.save(pokemon);
+}
+
+// Diminui o nível do Pokémon, validando o treinador
+public Pokemon diminuirNivel(Long idTreinador, String nomeTreinador, Long idPokemon) {
+    Treinador treinador = treinadorRepository.findById(idTreinador)
+            .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
+
+    if (!treinador.getNome().equals(nomeTreinador)) {
+        throw new RuntimeException("Nome do treinador não corresponde ao ID");
     }
 
-    // Aumenta o nível do Pokemon
-    public Pokemon subirNivel(Long id) {
-        Pokemon pokemon = pokemonRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pokémon não encontrado"));
-        pokemon.setNivel(pokemon.getNivel() + 1);
-        return pokemonRepository.save(pokemon);
+    Pokemon pokemon = pokemonRepository.findById(idPokemon)
+            .orElseThrow(() -> new RuntimeException("Pokémon não encontrado"));
+
+    if (!pokemon.getTreinador().getId().equals(idTreinador)) {
+        throw new RuntimeException("Este Pokémon não pertence ao treinador informado");
     }
 
-    // Diminui o nível do Pokemon
-    public Pokemon diminuirNivel(Long id) {
-        Pokemon pokemon = pokemonRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pokémon não encontrado"));
-        if (pokemon.getNivel() > 1) {
-            pokemon.setNivel(pokemon.getNivel() - 1);
-        }
-        return pokemonRepository.save(pokemon);
+    if (pokemon.getNivel() > 1) {
+        pokemon.setNivel(pokemon.getNivel() - 1);
     }
+    return pokemonRepository.save(pokemon);
+}
+
+public Pokemon atualizarPokemon(Long idTreinador, String nomeTreinador, Long idPokemon, Pokemon novosDados) {
+    Treinador treinador = treinadorRepository.findById(idTreinador)
+            .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
+
+    if (!treinador.getNome().equals(nomeTreinador)) {
+        throw new RuntimeException("Nome do treinador não corresponde ao ID");
+    }
+
+    Pokemon pokemon = pokemonRepository.findById(idPokemon)
+            .orElseThrow(() -> new RuntimeException("Pokémon não encontrado"));
+
+    if (!pokemon.getTreinador().getId().equals(idTreinador)) {
+        throw new RuntimeException("Este Pokémon não pertence ao treinador informado");
+    }
+
+    // Atualiza os campos, se fornecidos
+    if (novosDados.getNome() != null) {
+        pokemon.setNome(novosDados.getNome());
+    }
+    if (novosDados.getImagemUrl() != null) {
+        pokemon.setImagemUrl(novosDados.getImagemUrl());
+    }
+    if (novosDados.getTipo() != null) {
+        pokemon.setTipo(novosDados.getTipo());
+    }
+    if (novosDados.getNivel() != null) {
+        pokemon.setNivel(novosDados.getNivel());
+    }
+
+    return pokemonRepository.save(pokemon);
+}
+
 
 
 }

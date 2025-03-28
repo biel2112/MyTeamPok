@@ -1,5 +1,7 @@
 package com.pokemon.angular_pokemon.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 
@@ -32,7 +34,8 @@ public class Pokemon {
     private String imagemUrl;
 
     @ManyToOne
-    @JoinColumn(name = "treinador_id", nullable = true)
+    @JoinColumn(name = "treinador_id")
+    @JsonIgnore
     private Treinador treinador;
 
 }
