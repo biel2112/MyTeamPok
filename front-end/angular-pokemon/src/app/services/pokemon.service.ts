@@ -25,6 +25,28 @@ export class PokemonService {
     return this.http.get<any[]>(url);
   }
 
+  capturarPokemon(treinadorId: number, nomeTreinador: string, pokemon: Pokemon): Observable<Pokemon>{
+    const url = `${this.apiUrl}/${treinadorId}/${nomeTreinador}/pokemons/new`;
+    return this.http.post<Pokemon>(url, pokemon);
+  }
+
+  atualizarPokemon(id: number, pokemon: Partial<Pokemon>): Observable<Pokemon>{
+    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}`, pokemon);
+  }
+
+  deletarPokemon(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  subirNivel(id: number): Observable<Pokemon> {
+    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}/subir-nivel`, {});
+  }
+
+  diminuirNivel(id: number): Observable<Pokemon> {
+    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}/diminuir-nivel`, {});
+  }
+
+
 }
 
 

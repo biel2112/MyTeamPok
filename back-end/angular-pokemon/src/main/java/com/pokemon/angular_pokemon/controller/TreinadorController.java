@@ -55,7 +55,7 @@ public class TreinadorController {
     }
 
     // Adicionar um Pokémon ao treinador
-    @PostMapping("/{id}/{nome}/pokemons")
+    @PostMapping("/{id}/{nome}/pokemons/new")
     public ResponseEntity<Treinador> adicionarPokemon(
             @PathVariable Long id, 
             @PathVariable String nome,

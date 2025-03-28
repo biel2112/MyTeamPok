@@ -9,15 +9,14 @@ const routes: Routes = [
     redirectTo: '/treinadores',
     pathMatch: 'full',
   },
-  { path: 'treinadores/:treinadorId/:nomeTreinador/pokemons', component: PokemonListComponent },
-  // {
-  //   path: 'pokemons',
-  //   component: PokemonListComponent,
-  // },
-  // {
-  //   path: 'pokemons/new',
-  //   component: PokemonFormComponent,
-  // },
+  {
+    path: 'treinadores/:treinadorId/:nomeTreinador/pokemons',
+    component: PokemonListComponent
+  },
+  {
+    path: 'treinadores/:treinadorId/:nomeTreinador//pokemons/new',
+    component: PokemonFormComponent,
+  },
   // {
   //   path: 'pokemons/edit/:id',
   //   component: PokemonEditComponent,
