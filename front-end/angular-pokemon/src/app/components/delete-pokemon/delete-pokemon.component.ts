@@ -22,18 +22,11 @@ export class DeletePokemonComponent implements OnInit{
     this.pokemonId = Number(this.route.snapshot.paramMap.get('pokemonId'));
   }
 
-  deletarPokemon(): void{
-
-    if(!this.treinadorId || !this.nomeTreinador){
-      alert("Treinador não encontrado!")
-    };
-
-
+  deletarPokemon() {
     this.pokemonService.deletarPokemon(this.treinadorId, this.nomeTreinador, this.pokemonId)
       .subscribe(() => {
-        alert('Pokémon removido com sucesso!');
         this.router.navigate(['/treinadores', this.treinadorId, this.nomeTreinador, 'pokemons']);
-      })
+      });
   }
 
   cancelar(): void {

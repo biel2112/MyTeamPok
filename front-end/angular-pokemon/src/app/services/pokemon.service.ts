@@ -35,7 +35,7 @@ export class PokemonService {
   }
 
   deletarPokemon(treinadorId: number, nomeTreinador: string, id: number): Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/${treinadorId}/${nomeTreinador}/pokemons/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${treinadorId}/${nomeTreinador}/pokemons/delete/${id}`);
   }
 
   subirNivel(id: number): Observable<Pokemon> {

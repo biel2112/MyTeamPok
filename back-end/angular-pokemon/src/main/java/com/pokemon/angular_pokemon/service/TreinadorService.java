@@ -58,13 +58,28 @@ public class TreinadorService {
         return treinadorRepository.save(treinador);
     }
 
-    public Treinador removerPokemon(Long treinadorId, String nomeTreinador, Long pokemonId){
+    public Treinador removerPokemon(Long treinadorId, String nomeTreinador, Long pokemonId) {
         Treinador treinador = treinadorRepository.findByIdAndNome(treinadorId, nomeTreinador)
             .orElseThrow(() -> new RuntimeException("Treinador não encontrado!"));
-
-        treinador.getPokemons().removeIf(pokemon -> pokemon.getId().equals(pokemonId));
-        return treinadorRepository.save(treinador);
-        
+    
+        Pokemon pokemon = pokemonRepository.findById(pokemonId)
+            .orElseThrow(() -> new RuntimeException("Pokémon não encontrado!"));
+    
+        if (!treinador.getPokemons().contains(pokemon)) {
+            throw new RuntimeException("Esse Pokémon não pertence a esse treinador!");
+        }
+    
+        // Desassocia o Pokémon do treinador
+        pokemon.setTreinador(null);
+        pokemonRepository.save(pokemon);
+    
+        // Remove o Pokémon da lista do treinador
+        treinador.getPokemons().remove(pokemon);
+    
+        // Salva as mudanças no banco
+        treinadorRepository.save(treinador);
+    
+        return treinador;
     }
 
     public List<Pokemon> listarPokemons(Long treinadorId, String nomeTreinador){

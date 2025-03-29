@@ -19,7 +19,7 @@ const routes: Routes = [
     component: PokemonFormComponent,
   },
   {
-    path: 'treinadores/:treinadorId/:nomeTreinador/pokemons/delete/:id',
+    path: 'treinadores/:treinadorId/:nomeTreinador/pokemons/delete/:pokemonId',
     component: DeletePokemonComponent,
   },
   // {
