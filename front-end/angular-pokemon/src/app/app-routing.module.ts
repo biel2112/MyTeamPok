@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 import { PokemonFormComponent } from './components/pokemon-form/pokemon-form.component';
 import { DeletePokemonComponent } from './components/delete-pokemon/delete-pokemon.component';
+import { PokemonEditComponent } from './components/pokemon-edit/pokemon-edit.component';
 
 const routes: Routes = [
   {
@@ -22,10 +23,10 @@ const routes: Routes = [
     path: 'treinadores/:treinadorId/:nomeTreinador/pokemons/delete/:pokemonId',
     component: DeletePokemonComponent,
   },
-  // {
-  //   path: 'pokemons/edit/:id',
-  //   component: PokemonEditComponent,
-  // }
+  {
+    path: 'treinadores/:treinadorId/:nomeTreinador/pokemons/edit/:pokemonId',
+    component: PokemonEditComponent,
+  }
 ];
 
 @NgModule({

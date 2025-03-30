@@ -104,7 +104,7 @@ public class TreinadorController {
         return ResponseEntity.ok(atualizado);
     }
 
-    @PatchMapping("/{idTreinador}/{nomeTreinador}/pokemons/{id}")
+    @PatchMapping("/{idTreinador}/{nomeTreinador}/pokemons/edit/{id}")
     public ResponseEntity<Pokemon> atualizarPokemon(
         @PathVariable Long idTreinador,
         @PathVariable String nomeTreinador,

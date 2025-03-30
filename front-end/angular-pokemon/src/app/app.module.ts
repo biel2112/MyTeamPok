@@ -9,6 +9,7 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
 import { PokemonFormComponent } from './components/pokemon-form/pokemon-form.component';
 import { FormsModule } from '@angular/forms';
 import { DeletePokemonComponent } from './components/delete-pokemon/delete-pokemon.component';
+import { PokemonEditComponent } from './components/pokemon-edit/pokemon-edit.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { DeletePokemonComponent } from './components/delete-pokemon/delete-pokem
     PokemonListComponent,
     PokemonFormComponent,
     DeletePokemonComponent,
+    PokemonEditComponent
   ],
   imports: [
     BrowserModule,

@@ -16,25 +16,21 @@
               <h5 class="card-text">Tipo: {{ pokemon.tipo }}</h5>
               <p class="card-text">Nível: {{ pokemon.nivel }}</p>
 
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between flex-wrap">
                 <button
                   class="botao-quadrado btn btn-danger btn-sm"
                   (click)="navegarParaDeletar(pokemon.id!)"
-
                 >
                   <i class="bi bi-trash"></i>
                 </button>
                 <button
                   class="botao-quadrado btn btn-primary btn-sm"
-                  [routerLink]="['/pokemons/edit', pokemon.id]"
+                  (click)="navegarParaEditar(pokemon.id!)"
                 >
                   <i class="bi bi-pencil"></i>
                 </button>
-              </div>
-
-              <div class="mt-2 d-flex justify-content-center">
                 <button
-                  class="botao-quadrado btn btn-success btn-sm me-2"
+                  class="botao-quadrado btn btn-success btn-sm"
                   [disabled]="pokemon.nivel >= 100"
                 >
                   <i class="bi bi-arrow-up"></i>
@@ -45,6 +41,7 @@
                   <i class="bi bi-arrow-down"></i>
                 </button>
               </div>
+
             </div>
           </div>
         </div>
@@ -55,7 +52,7 @@
   <button
     class="btn btn-primary w-25 mt-3 mb-4"
     (click)="navegarParaCapturar()"
-    >
+  >
     Cadastrar Novo Pokémon
   </button>
 </div>

@@ -83,6 +83,22 @@ export class PokemonListComponent implements OnInit {
     }
   }
 
+  navegarParaEditar(id: number){
+    const treinadorId = this.route.snapshot.paramMap.get("treinadorId");
+    const nomeTreinador = this.route.snapshot.paramMap.get("nomeTreinador");
+
+    if(treinadorId && nomeTreinador){
+      this.router.navigate([
+        'treinadores',
+        treinadorId,
+        nomeTreinador,
+        'pokemons',
+        'edit',
+        id
+      ])
+    }
+  }
+
   // Adicionando método para obter a classe de cores dos cards baseado no tipo de Pokémon
   coresCards(tipo: string): string {
     const cores: { [key: string]: string } = {

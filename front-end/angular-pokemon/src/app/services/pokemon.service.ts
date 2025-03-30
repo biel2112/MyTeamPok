@@ -25,13 +25,17 @@ export class PokemonService {
     return this.http.get<any[]>(url);
   }
 
+  getPokemonById(treinadorId: number, nomeTreinador: string, id: number): Observable<Pokemon> {
+    return this.http.get<Pokemon>(`${this.apiUrl}/${treinadorId}/${nomeTreinador}/pokemons/${id}`);
+  }
+
   capturarPokemon(treinadorId: number, nomeTreinador: string, pokemon: Pokemon): Observable<Pokemon>{
     const url = `${this.apiUrl}/${treinadorId}/${nomeTreinador}/pokemons/new`;
     return this.http.post<Pokemon>(url, pokemon);
   }
 
-  atualizarPokemon(id: number, pokemon: Partial<Pokemon>): Observable<Pokemon>{
-    return this.http.patch<Pokemon>(`${this.apiUrl}/${id}`, pokemon);
+  atualizarPokemon(treinadorId: Number, nomeTreinador: String, id: number, pokemon: Partial<Pokemon>): Observable<Pokemon>{
+    return this.http.patch<Pokemon>(`${this.apiUrl}/${treinadorId}/${nomeTreinador}/edit/${id}`, pokemon);
   }
 
   deletarPokemon(treinadorId: number, nomeTreinador: string, id: number): Observable<void>{
