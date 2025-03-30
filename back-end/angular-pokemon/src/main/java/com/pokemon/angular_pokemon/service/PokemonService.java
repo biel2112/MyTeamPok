@@ -8,7 +8,9 @@ import com.pokemon.angular_pokemon.repository.TreinadorRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 // Essa classe contém toda a lógica de negócio do sistema.
 @Service
@@ -78,7 +80,6 @@ public Pokemon atualizarPokemon(Long idTreinador, String nomeTreinador, Long idP
         throw new RuntimeException("Este Pokémon não pertence ao treinador informado");
     }
 
-    // Atualiza os campos, se fornecidos
     if (novosDados.getNome() != null) {
         pokemon.setNome(novosDados.getNome());
     }
@@ -95,6 +96,10 @@ public Pokemon atualizarPokemon(Long idTreinador, String nomeTreinador, Long idP
     return pokemonRepository.save(pokemon);
 }
 
+public Pokemon getPokemonPorTreinador(Long treinadorId, Long pokemonId) {
+        return pokemonRepository.findByIdAndTreinadorId(pokemonId, treinadorId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokémon não encontrado"));
+    }
 
 
 }

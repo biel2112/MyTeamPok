@@ -7,8 +7,7 @@ import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
   templateUrl: './pokemon-edit.component.html',
   styleUrls: ['./pokemon-edit.component.css']
 })
-export class PokemonEditComponent implements OnInit{
-
+export class PokemonEditComponent implements OnInit {
   pokemon: Pokemon = {
     id: 0,
     nome: '',
@@ -17,50 +16,54 @@ export class PokemonEditComponent implements OnInit{
     imagemUrl: ''
   };
 
-  constructor(private route: ActivatedRoute, private router: Router, private pokemonService: PokemonService){}
-
   treinadorId!: number;
   nomeTreinador!: string;
+  pokemonId!: number;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private pokemonService: PokemonService
+  ) {}
 
   ngOnInit(): void {
-    const treinadorId = Number(this.route.snapshot.paramMap.get('treinadorId'));
-    const nomeTreinador = this.route.snapshot.paramMap.get('nomeTreinador') || '';
-
-
+    this.treinadorId = Number(this.route.snapshot.paramMap.get('treinadorId'));
+    this.nomeTreinador = this.route.snapshot.paramMap.get('nomeTreinador') || '';
 
     const pokemonIdParam = this.route.snapshot.paramMap.get('pokemonId');
-    console.log("pokemonIdParam da URL:", pokemonIdParam); // <-- Verifica o que chega da rota
-
-
-
+    console.log('pokemonIdParam da URL:', pokemonIdParam);
 
     if (!pokemonIdParam) {
-      console.error("Erro: ID do Pokémon não encontrado na rota.");
+      console.error('Erro: ID do Pokémon não encontrado na rota.');
       return;
     }
 
-    const pokemonId = Number(pokemonIdParam);
-    console.log("pokemonId convertido:", pokemonId); // <-- Verifica se a conversão foi bem-sucedida
+    this.pokemonId = Number(pokemonIdParam);
+    console.log('pokemonId convertido:', this.pokemonId);
 
-    if (isNaN(pokemonId) || pokemonId <= 0) {
-      console.error("Erro: ID do Pokémon inválido.");
+    if (isNaN(this.pokemonId) || this.pokemonId <= 0) {
+      console.error('Erro: ID do Pokémon inválido.');
       return;
     }
 
-    console.log(`URL: http://localhost:8080/treinadores/${treinadorId}/${nomeTreinador}/pokemons/${pokemonId}`);
+    this.carregarPokemon();
+  }
 
-
-    this.pokemonService.getPokemonById(this.treinadorId, this.nomeTreinador, pokemonId).subscribe((pokemon) => {
-      console.log("Pokémon recebido:", pokemon);
-      this.pokemon = pokemon;
-    }, error => {
-      console.error("Erro ao buscar Pokémon:", error);
+  carregarPokemon(): void {
+    this.pokemonService.getPokemonById(this.treinadorId, this.pokemonId).subscribe({
+      next: (pokemon) => {
+        console.log('Pokémon recebido:', pokemon);
+        this.pokemon = pokemon;
+      },
+      error: (error) => {
+        console.error('Erro ao buscar Pokémon:', error);
+      }
     });
   }
 
-  salvarEdicao(): void{
+  salvarEdicao(): void {
     if (!this.pokemon.id || isNaN(this.pokemon.id) || this.pokemon.id <= 0) {
-      alert("Erro: ID do Pokémon inválido.");
+      alert('Erro: ID do Pokémon inválido.');
       return;
     }
 
@@ -71,12 +74,15 @@ export class PokemonEditComponent implements OnInit{
       {
         nome: this.pokemon.nome,
         tipo: this.pokemon.tipo,
-        imagemUrl: this.pokemon.imagemUrl,
+        imagemUrl: this.pokemon.imagemUrl
       }
-    ).subscribe(() => {
-      this.router.navigate(['/treinadores', this.treinadorId, this.nomeTreinador, 'pokemons']);
-    }, error => {
-      console.error("Erro ao atualizar Pokémon:", error);
+    ).subscribe({
+      next: () => {
+        this.router.navigate(['/treinadores', this.treinadorId, this.nomeTreinador, 'pokemons']);
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar Pokémon:', error);
+      }
     });
   }
 }

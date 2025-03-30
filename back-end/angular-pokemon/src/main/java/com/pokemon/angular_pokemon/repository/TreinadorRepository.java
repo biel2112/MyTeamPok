@@ -10,4 +10,5 @@ public interface TreinadorRepository extends JpaRepository<Treinador, Long>{
 
     Optional<Treinador> findByIdAndNome(Long id, String nome);
     
+    
 }

@@ -2,8 +2,10 @@ package com.pokemon.angular_pokemon.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,6 +115,15 @@ public class TreinadorController {
     Pokemon atualizado = pokemonService.atualizarPokemon(idTreinador, nomeTreinador, id, novosDados);
     return ResponseEntity.ok(atualizado);
 }
+
+@GetMapping("/{idTreinador}/pokemons/{pokemonId}")
+    public ResponseEntity<Pokemon> getPokemonPorTreinador(
+        @PathVariable Long idTreinador,
+        @PathVariable Long pokemonId
+    ) {
+        Pokemon pokemon = pokemonService.getPokemonPorTreinador(idTreinador, pokemonId);
+        return ResponseEntity.ok(pokemon);
+    }
 
     
 }

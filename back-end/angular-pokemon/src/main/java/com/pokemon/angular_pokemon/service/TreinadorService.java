@@ -87,12 +87,5 @@ public class TreinadorService {
                 .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
         return treinador.getPokemons();
     }
-
-    public Treinador atualizarPokemons(Long treinadorId, String nomeTreinador, List<Pokemon> novosPokemons) {
-        Treinador treinador = treinadorRepository.findByIdAndNome(treinadorId, nomeTreinador)
-                .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
-        treinador.setPokemons(novosPokemons);
-        return treinadorRepository.save(treinador);
-    }
     
 }
